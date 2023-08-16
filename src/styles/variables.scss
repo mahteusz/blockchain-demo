@@ -1,0 +1,38 @@
+$spaces: (
+  x-small: 0.4rem,
+  small: 1rem,
+  medium: 1.8rem,
+  large: 2.4rem,
+  x-large: 3.2rem
+);
+
+$fonts: (
+  primary: 'Archivo Narrow',
+  secondary: 'Mukta Vaani',
+);
+
+$fonts-sizes: (
+  x-small: 1.4rem,
+  small: 1.8rem,
+  medium: 2.2rem,
+  large: 2.8rem,
+  x-large: 4rem
+);
+
+$theme: (
+  primary: #8de9a1,
+  secondary: #8D94BA,
+  danger:rgb(248, 128, 136),
+  primary-text: #0D1821,
+  secondary-text:#F0EFF4,
+  grey: #a8a8a8
+);
+
+// $theme: (
+//   primary: #22AAA1,
+//   secondary: #CCAD8F,
+//   background: #071013,
+//   danger:#ba000d,
+//   text: #F0EFF4,
+//   grey: #c0c0c0
+// );

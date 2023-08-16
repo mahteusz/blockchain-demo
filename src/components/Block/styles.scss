@@ -1,0 +1,65 @@
+@import '../../styles/variables.scss';
+
+.block-container {
+  background-color: #{map-get($theme, primary)};
+  padding: #{map-get($spaces, small)};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 20rem;
+  border-radius: 1rem;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    font-size: #{map-get($fonts-sizes, x-small)};
+    color: #{map-get($theme, primary-text)};
+    gap: #{map-get($spaces, small)};
+  }
+
+  &__form-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  &__form-button {
+    border-radius: 0.25rem;
+    margin-top: #{map-get($spaces, small)};
+    font-size: #{map-get($fonts-sizes, x-small)};
+    padding: #{map-get($spaces, x-small)};
+    padding-left: #{map-get($spaces, medium)};
+    padding-right: #{map-get($spaces, medium)};
+    border: 0;
+    transition: all 0.5s ease;
+    background-color: #{map-get($theme, secondary)};
+    color: #{map-get($theme, secondary-text)};
+
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+      box-shadow: 0.25rem 0.25rem #{map-get($theme, primary-text)};
+    }
+  }
+
+  &__input {
+    border: 0;
+    text-align: center;
+
+    &:active, &:focus {
+      outline: 0.1rem solid #{map-get($theme, secondary)};
+    }
+  }
+
+  .hash {
+    width: 100%;
+  }
+
+  &.invalid {
+    background-color: #{map-get($theme, danger)};
+  }
+}
