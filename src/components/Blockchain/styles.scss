@@ -27,7 +27,7 @@
   }
 
   &__block-name {
-    font-size: #{map-get($fonts-sizes, medium)};
+    font-size: #{map-get($fonts-sizes, small)};
   }
 
   &__button-container {

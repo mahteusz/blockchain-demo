@@ -9,7 +9,7 @@
   color: #{map-get($theme, text)};
 
   &__block-name {
-    font-size: #{map-get($fonts-sizes, medium)};
+    font-size: #{map-get($fonts-sizes, small)};
   }
 
   &__item {

@@ -125,12 +125,12 @@ const Blockchain = () => {
       <h1 className={`blockchain-status ${isBlockchainValid() ? 'valid' : 'invalid'}`}>
       {isBlockchainValid() ? 'Valid' : 'Invalid'} Blockchain
       </h1>
-      <div className="blockchain-container">
+      <main className="blockchain-container">
         {
           blocks.map((_, index) => {
             return (
-              <div className="blockchain-container__block" key={index}>
-                <span className="blockchain-container__block-name">Block {index}</span>
+              <section className="blockchain-container__block" key={index}>
+                <h2 className="blockchain-container__block-name">Block {index}</h2>
                 <Block
                   block={{
                     id: blocks[index].id,
@@ -144,7 +144,7 @@ const Blockchain = () => {
                   handleHashUpdate={handleHashUpdate}
                   isPreviousHashValid={checkPreviousHash(index)}
                 />
-              </div>
+              </section>
             )
           })
         }
@@ -153,7 +153,7 @@ const Blockchain = () => {
             Add new block
           </button>
         </div>
-      </div>
+      </main>
     </>
   )
 }
