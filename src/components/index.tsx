@@ -1,3 +1,5 @@
 export { default as Transaction } from './Transaction'
 export { default as IndividualBlock } from './IndividualBlock'
 export { default as Block } from './Block'
+export { default as Blockchain} from './Blockchain'
+export { default as Header} from './Header'

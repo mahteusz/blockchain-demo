@@ -12,8 +12,8 @@ const Block = (props: IndividualBlockType) => {
   const [invalid, setInvalid] = useState<boolean>(true)
 
   const [transactionAmount, setTransactionAmount] = useState<number>(0)
-  const [transactionFrom, setTransactionFrom] = useState<string>('sender')
-  const [transactionTo, setTransactionTo] = useState<string>('receiver')
+  const [transactionFrom, setTransactionFrom] = useState<string>('0x00000000')
+  const [transactionTo, setTransactionTo] = useState<string>('0x00000000')
 
   useEffect(() => {
     setHash(calculateHash(

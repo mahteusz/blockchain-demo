@@ -7,6 +7,7 @@ export const isHashValid = (hash: string) => {
 }
 
 export const calculateHash = (data: string) => {
+  data = data.replace(/\s/g, '')
   const dataToSha256 = Crypto.SHA256(data).toString()
   return dataToSha256
 }

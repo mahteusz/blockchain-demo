@@ -1,38 +1,43 @@
 import './styles.scss'
 import { useState, useEffect } from 'react'
 import { Transaction } from '..'
-import { isHashValid, calculateHash, mine } from '../../util/blocks'
-import { inputHandlerNumber, inputHandlerString } from '../../util/onChangeHandlers'
-import { BlockType } from '../../types'
+import { isHashValid, mine } from '../../util/blocks'
+import { BlockType, TransactionType } from '../../types'
 
-const Block = (props: BlockType) => {
-  const [index, setIndex] = useState<number>(props.index)
-  const [nonce, setNonce] = useState<number>(props.nonce)
-  const [hash, setHash] = useState<string>(props.hash)
-  const [previousHash, setPreviousHash] = useState<string>(props.previousHash)
+type Props = {
+  outerSetState(id: string, index: number, nonce: number, previousHash: string, transaction: TransactionType): void,
+  handleHashUpdate(id: string, newHash: string, newNonce: number): void
+  isPreviousHashValid: boolean
+  block: BlockType
+}
+
+const Block = (props: Props) => {
   const [invalid, setInvalid] = useState<boolean>(true)
 
   const [transactionAmount, setTransactionAmount] = useState<number>(0)
-  const [transactionFrom, setTransactionFrom] = useState<string>('sender')
-  const [transactionTo, setTransactionTo] = useState<string>('receiver')
+  const [transactionFrom, setTransactionFrom] = useState<string>('0x00000000')
+  const [transactionTo, setTransactionTo] = useState<string>('0x00000000')
 
   useEffect(() => {
-    setHash(calculateHash(
-      `${index}${transactionAmount}${transactionFrom}${transactionTo}${previousHash}${nonce}`
-    ))
-  }, [index, nonce, previousHash, transactionAmount, transactionFrom, transactionTo])
+    (props.isPreviousHashValid && isHashValid(props.block.hash)) ? setInvalid(false) : setInvalid(true)
+  }, [props.block.hash, props.isPreviousHashValid])
 
   useEffect(() => {
-    isHashValid(hash) ? setInvalid(false) : setInvalid(true)
-  }, [hash])
+    props.outerSetState(props.block.id!, props.block.index, props.block.nonce, props.block.previousHash,
+      { amount: transactionAmount, from: transactionFrom, to: transactionTo })
+  }, [transactionAmount, transactionFrom, transactionTo])
 
-  const handleMine = () => {
-    const { newHash, newNonce } = mine(hash, nonce,
-      `${index}${transactionAmount}${transactionFrom}${transactionTo}${previousHash}`
-    )
-    setHash(newHash)
-    setNonce(newNonce)
-    setInvalid(false)
+  const handleMining = () => {
+    const { newHash, newNonce } = mine(props.block.hash, props.block.nonce,
+      `
+      ${props.block.index}
+      ${props.block.transaction.amount}
+      ${props.block.transaction.from}
+      ${props.block.transaction.to}
+      ${props.block.previousHash}
+    `)
+
+    props.handleHashUpdate(props.block.id!, newHash, newNonce)
   }
 
   return (
@@ -45,8 +50,9 @@ const Block = (props: BlockType) => {
           <input
             className="block-container__input"
             id="index"
-            value={index}
-            onChange={(e) => inputHandlerNumber(e, setIndex)}
+            value={props.block.index}
+            onChange={(e) => props.outerSetState(props.block.id!, Number(e.target.value), props.block.nonce, props.block.previousHash,
+              { amount: transactionAmount, from: transactionFrom, to: transactionTo })}
           />
         </div>
 
@@ -57,8 +63,11 @@ const Block = (props: BlockType) => {
           <input
             className="block-container__input"
             id="nonce"
-            value={nonce}
-            onChange={(e) => inputHandlerNumber(e, setNonce)}
+            value={props.block.nonce}
+            onChange={
+              (e) =>
+                props.outerSetState(props.block.id!, props.block.index, Number(e.target.value), props.block.previousHash,
+                  { amount: transactionAmount, from: transactionFrom, to: transactionTo })}
           />
         </div>
 
@@ -69,8 +78,7 @@ const Block = (props: BlockType) => {
           <input
             className="block-container__input hash"
             id="hash"
-            value={hash}
-            onChange={(e) => inputHandlerString(e, setHash)}
+            value={props.block.hash}
             disabled={true}
           />
         </div>
@@ -82,8 +90,8 @@ const Block = (props: BlockType) => {
           <input
             className="block-container__input hash"
             id="hash"
-            value={previousHash}
-            onChange={(e) => inputHandlerString(e, setPreviousHash)}
+            value={props.block.previousHash}
+            disabled={true}
           />
         </div>
 
@@ -107,7 +115,7 @@ const Block = (props: BlockType) => {
       </div>
       <button
         className='block-container__form-button'
-        onClick={handleMine}
+        onClick={handleMining}
       >
         Mine
       </button>

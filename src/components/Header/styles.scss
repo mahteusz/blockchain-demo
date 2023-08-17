@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  background-color:#{map-get($theme, grey)};
+  width: 100%;
+  padding: 3rem 1.5rem;
+  justify-content: space-around;
+  align-items: center;
+
+
+  &__logo {
+    font-weight: bold;
+    font-size: #{map-get($fonts-sizes, medium)};
+    color:#{map-get($theme, secondary)};
+  }
+
+  &__navigation {
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    gap:20px;
+  }
+
+  &__navigation-item {
+    list-style-type:none;
+    font-size: #{map-get($fonts-sizes, small)};
+    transition: transform 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.selected {
+  border-bottom:2px solid #{map-get($theme, secondary)};
+  font-weight: bold;
+}

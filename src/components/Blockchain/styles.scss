@@ -1,0 +1,59 @@
+@import '../../styles/variables.scss';
+
+.blockchain-status {
+  font-size: #{map-get($fonts-sizes, medium)};
+  text-align: center;
+  margin-top: #{map-get($spaces, x-large)};
+}
+
+.invalid {
+  color: #{map-get($theme, danger)};
+}
+
+.valid {
+  color: #{map-get($theme, primary)};
+}
+
+.blockchain-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #{map-get($theme, text)};
+
+  &__block {
+    text-align: center;
+    margin: #{map-get($spaces, large)};
+  }
+
+  &__block-name {
+    font-size: #{map-get($fonts-sizes, medium)};
+  }
+
+  &__button-container {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button {
+    border-radius: 0.25rem;
+    margin-top: #{map-get($spaces, small)};
+    font-size: #{map-get($fonts-sizes, small)};
+    padding: #{map-get($spaces, x-small)};
+    padding-left: #{map-get($spaces, medium)};
+    padding-right: #{map-get($spaces, medium)};
+    border: 0;
+    transition: all 0.5s ease;
+    background-color: #{map-get($theme, secondary)};
+    color: #{map-get($theme, secondary-text)};
+    margin-bottom: #{map-get($spaces, x-large)};
+
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+      box-shadow: 0.25rem 0.25rem #{map-get($theme, primary-text)};
+    }
+  }
+}
