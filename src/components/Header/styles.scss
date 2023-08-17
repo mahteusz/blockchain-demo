@@ -9,6 +9,10 @@
   justify-content: space-around;
   align-items: center;
 
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+  }
 
   &__logo {
     font-weight: bold;
