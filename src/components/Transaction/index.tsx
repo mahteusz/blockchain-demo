@@ -1,6 +1,7 @@
 import './styles.scss'
 import { TransactionType } from '../../types'
 import { Dispatch } from 'react'
+import { inputHandlerNumber, inputHandlerString } from '../../util/onChangeHandlers'
 
 type Props = {
   transactionData: TransactionType,
@@ -10,20 +11,6 @@ type Props = {
 }
 
 const Transaction = (props: Props) => {
-
-  const inputHandlerNumber = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, setFunction: Dispatch<React.SetStateAction<number>>) => {
-    const newValue = event.target.value
-    if (isNaN(Number(newValue)))
-      return
-
-    setFunction(Number(newValue))
-  }
-
-  const inputHandlerString = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, setFunction: Dispatch<React.SetStateAction<string>>) => {
-    const newValue = event.target.value
-    setFunction(newValue)
-  }
-
   return (
     <div className='transaction-container'>
       <div className='transaction-container__cell'>
